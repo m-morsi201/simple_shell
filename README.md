@@ -1,1 +1,2 @@
-task simple shell
+This is our team prjcet: simple shell.
+
