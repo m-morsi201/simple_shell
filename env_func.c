@@ -47,7 +47,7 @@ int my_set_env(inf_t *inf)
 		erro_put("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (set_env(inf, inf->argv[1], inf->argv[2]))
+	if (set_envn(inf, inf->argv[1], inf->argv[2]))
 		return (0);
 	return (1);
 }
@@ -68,7 +68,7 @@ int my_unset_env(inf_t *inf)
 		return (1);
 	}
 	for (m = 1; m <= inf->argco; m++)
-		unset_env(inf, inf->argv[m]);
+		unset_envn(inf, inf->argv[m]);
 
 	return (0);
 }
@@ -79,13 +79,13 @@ int my_unset_env(inf_t *inf)
  * Return: Always (0).
 */
 
-int popu_env_ls(info_t *inf)
+int popu_env_ls(inf_t *inf)
 {
 	list_t *n = NULL;
 	size_t m;
 
 	for (m = 0; envn[m]; m++)
 		add_no_en(&n, envn[m], 0);
-	inf->env = n;
+	inf->en_v = n;
 	return (0);
 }

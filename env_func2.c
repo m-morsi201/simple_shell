@@ -10,7 +10,7 @@ char **get_envn(inf_t *inf)
 {
 	if (!inf->envn || inf->env_chn)
 	{
-		inf->envn = list_to_strings(inf->en_v);
+		inf->envn = ls_to_str(inf->en_v);
 		inf->env_chn = 0;
 	}
 

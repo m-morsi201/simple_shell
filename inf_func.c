@@ -68,7 +68,7 @@ void fr_inf(inf_t *inf, int alt)
 			f_list(&(inf->alts));
 		free_memo(inf->envn);
 			inf->envn = NULL;
-		ifree_memo((void **)inf->cmd_buf);
+		ifree_memo((void **)inf->cmd_buff);
 		if (inf->re_fldes > 2)
 			close(inf->re_fldes);
 		_putchar(BUF_FLUSH);

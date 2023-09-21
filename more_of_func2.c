@@ -40,9 +40,9 @@ int conv_stoint(char *st)
  * (-1) if error.
 */
 
-void err_mas(info_t *info, char *ert)
+void err_mas(inf_t *info, char *ert)
 {
-	_eputs(info->fname);
+	_eputs(info->fl_name);
 	_eputs(": ");
 	p_dec(info->line_count, STDERR_FILENO);
 	_eputs(": ");

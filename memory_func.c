@@ -27,7 +27,7 @@ void free_memo(char **b)
 
 	if (!b)
 		return;
-	while (*bat)
+	while (*b)
 		free(*b++);
 	free(r);
 }

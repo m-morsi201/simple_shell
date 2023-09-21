@@ -9,7 +9,7 @@
 
 int main(int a_c, char **a_v)
 {
-	info_t inf[] = { INF_IN };
+	inf_t inf[] = { INF_IN };
 	int fl_des;
 
 	fl_des = 2;
@@ -40,7 +40,7 @@ int main(int a_c, char **a_v)
 		}
 		inf->re_fldes = fl_des;
 	}
-	populate_env_list(inf);
+	popu_env_ls(inf);
 	read_history(inf);
 	hsh(inf, a_v);
 	return (EXIT_SUCCESS);

@@ -45,7 +45,7 @@ char *str_doup(const char *s)
 	if (!r)
 		return (NULL);
 	for (len++; len--;)
-		ret[len] = *--s;
+		r[len] = *--s;
 	return (r);
 }
 

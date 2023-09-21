@@ -5,7 +5,7 @@
  * @f: struct pointer.
  * Return: 1 if interactive mode, or 0 if else.
 */
-int inter_act(info_t *f)
+int inter_act(inf_t *f)
 {
 	return (isatty(STDIN_FILENO) && f->readfd <= 2);
 }
