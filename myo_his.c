@@ -52,7 +52,7 @@ int set_als(inf_t *inf, char *s)
 		return (un_set_als(inf, s));
 
 	un_set_als(inf, s);
-	return (get_no_ind(inf_t &(inf->alts), s, 0) == NULL);
+	return (add_no_en(&(inf->alts), s, 0) == NULL);
 }
 
 /**
