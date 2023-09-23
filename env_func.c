@@ -84,8 +84,8 @@ int popu_env_ls(inf_t *inf)
 	list_t *n = NULL;
 	size_t m;
 
-	for (m = 0; envn[m]; m++)
-		add_no_en(&n, envn[m], 0);
+	for (m = 0; environ[m]; m++)
+		add_no_en(&n, environ[m], 0);
 	inf->en_v = n;
 	return (0);
 }

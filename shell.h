@@ -22,6 +22,8 @@
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
+extern char **environ;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -35,7 +37,6 @@
 #include <stdarg.h>
 #include <ctype.h>
 
-extern char **envn;
 
 /**
  * struct list_str - it is a singly linked list.
@@ -153,7 +154,7 @@ int str_to_int(char *);
 int conv_stoint(char *);
 void err_mas(inf_t *, char *);
 int p_dec(int, int);
-char *conv_num(long int, int, int);
+char *convnum(long int, int, int);
 void del_comm(char *);
 
 /* prototypes for lis_func.c */

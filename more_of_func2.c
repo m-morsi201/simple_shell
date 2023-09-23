@@ -93,14 +93,14 @@ int p_dec(int np, int fdes)
 }
 
 /**
- * conv_num - func to convert.
+ * convnum - func to convert.
  * @num: it is a number.
  * @bs: it is a base.
  * @fs: it is an argument flags.
  * Return: a string .
 */
 
-char *conv_num(long int num, int bs, int fs)
+char *convnum(long int num, int bs, int fs)
 {
 	static char *arr;
 	static char buffer[50];
