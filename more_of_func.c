@@ -7,7 +7,7 @@
 */
 int inter_act(inf_t *f)
 {
-	return (isatty(STDIN_FILENO) && f->readfd <= 2);
+	return (isatty(STDIN_FILENO) && f->re_fldes <= 2);
 }
 
 /**

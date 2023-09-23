@@ -41,7 +41,7 @@ void st_inf(inf_t *inf, char **a_v)
 			;
 		inf->argco = m;
 
-		rep_ali(inf);
+		rep_als(inf);
 		rep_vrs(inf);
 	}
 }

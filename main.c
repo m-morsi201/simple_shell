@@ -41,7 +41,7 @@ int main(int a_c, char **a_v)
 		inf->re_fldes = fl_des;
 	}
 	popu_env_ls(inf);
-	read_history(inf);
+	re_hist(inf);
 	hsh(inf, a_v);
 	return (EXIT_SUCCESS);
 }

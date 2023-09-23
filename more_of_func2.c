@@ -42,13 +42,13 @@ int conv_stoint(char *st)
 
 void err_mas(inf_t *info, char *ert)
 {
-	_eputs(info->fl_name);
-	_eputs(": ");
-	p_dec(info->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(info->argv[0]);
-	_eputs(": ");
-	_eputs(ert);
+	erro_put(info->fl_name);
+	erro_put(": ");
+	p_dec(info->lnc, STDERR_FILENO);
+	erro_put(": ");
+	erro_put(info->argv[0]);
+	erro_put(": ");
+	erro_put(ert);
 }
 
 /**
@@ -67,7 +67,7 @@ int p_dec(int np, int fdes)
 	c = 0;
 
 	if (fdes == STDERR_FILENO)
-		put_char = _eputchar;
+		put_char = erro_put_ch;
 	if (np < 0)
 	{
 		a_b_s = -np;

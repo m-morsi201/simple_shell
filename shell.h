@@ -1,13 +1,26 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-/* for conv_num() */
+/* for conv_num */
 #define CONV_LOWER	1
 #define CONV_UNS	2
 
 #define BUF_FLUSH -1
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
+
+#define HIST_FILE ".simple_shell_hist"
+#define HIST_MAX 4096
+
+/*define for vrs_func.c*/
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+
+/*define for getinfunc.c*/
+#define USE_GETLINE 0
+#define USE_STRTOK 0
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,8 +55,8 @@ typedef struct list_str
  *struct passinfo - contains pseudo-arguements to pass into a function,
  *		allowing uniform prototype for function pointer struct
  *@argco: it is an the argument count.
- *@line_count: the error count
- *@err_num: the error code for exit()s
+ *@lnc: the error count
+ *@err_num: the error code for exit.
  *@linecount_flag: if on count this line of input
  *@fl_name:it is a filename.
  *@en_v: it is copy of environ.
@@ -51,11 +64,11 @@ typedef struct list_str
  *@his:it is a the history node
  *@alts: the alias node
  *@env_chn: it is changed environ.
- *@status: the return status of the last exec'd command
+ *@stat: the return status of the last exec'd command
  *@cmd_buff: address of pointer to cmd_buf, on if chaining
  *@cmd_buf_type: CMD_type ||, &&, ;
  *@re_fldes: it is a fdes which to read input.
- *@histcount: the history line number count
+ *@histco: the history line number count
  *@arg: it is a string arguements.
  *@argv: it is an array of strings.
  *@path: it is a path for the current command.
@@ -64,12 +77,12 @@ typedef struct list_str
 typedef struct passinfo
 {
 	int env_chn;
-	int status;
+	int stat;
 	int cmd_buf_type;
 	int re_fldes;
-	int histcount;
+	int histco;
 	int argco;
-	unsigned int line_count;
+	unsigned int lnc;
 	int err_num;
 	int linecount_flag;
 	char *fl_name;
@@ -86,6 +99,19 @@ typedef struct passinfo
 #define INF_IN \
 {0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, \
 	NULL, NULL, NULL}
+
+
+/**
+ *struct builtin - contains a builtin string and related function
+ *@type: the builtin command flag
+ *@func: the function
+*/
+
+typedef struct builtin
+{
+	char *type;
+	int (*func)(inf_t *);
+} builtin_table;
 
 
 /* prototypes for str_func.c */
@@ -118,7 +144,7 @@ void *re_allocat(void *, unsigned int, unsigned int);
 int ifree_memo(void **);
 
 /* prototypes for more_of_func.c */
-int interactive(inf_t *);
+int inter_act(inf_t *);
 int is_delm(char, char *);
 int is_alpha(int);
 int str_to_int(char *);
@@ -150,17 +176,24 @@ int erro_put_ch(char);
 int put_fl_des(char ch, int fl_des);
 int ps_fldes(char *s, int fl_des);
 
+/* prototypes for std_err_func2.c */
+int erro_at_cmd(char *);
+void pr_erro(inf_t *, char *);
+int pr_dec(int, int);
+char *conv_num(long int, int, int);
+void rem_comm(char *);
+
 /* prototypes for inf_func.c */
 void clr_inf(inf_t *);
 void st_inf(inf_t *, char **);
-void free_info(inf_t *, int);
+void fr_inf(inf_t *, int);
 
 /* prototypes for vrs_func.c */
-int is_chain(inf_t *, char *, size_t *);
-void check_chain(inf_t *, char *, size_t *, size_t, size_t);
-int rep_ali(inf_t *);
+int if_chn(inf_t *, char *, size_t *);
+void chk_chn(inf_t *, char *, size_t *, size_t, size_t);
+int rep_als(inf_t *);
 int rep_vrs(inf_t *);
-int replace_string(char **, char *);
+int rep_str(char **, char *);
 
 /* prototypes for env_fun.c */
 char *get_env(inf_t *, const char *);
@@ -173,5 +206,37 @@ int popu_env_ls(inf_t *);
 char **get_envn(inf_t *);
 int unset_envn(inf_t *, char *);
 int set_envn(inf_t *, char *, char *);
+
+/* prototypes for get_hist.c */
+char *get_histf(inf_t *inf);
+int wr_hist(inf_t *inf);
+int re_hist(inf_t *inf);
+int bld_hist_ls(inf_t *inf, char *buff, int ln_co);
+int renum_hist(inf_t *inf);
+
+/* prototypes for cmd_func.c */
+int my_ex(inf_t *);
+int myo_cd(inf_t *);
+int my_hlp(inf_t *);
+
+/* prototypes for myo_his.c */
+int my_hist(inf_t *);
+int my_als(inf_t *);
+
+/* prototypes for if_cmdfunc.c */
+int if_cmd(inf_t *, char *);
+char *dup_ch(char *, int, int);
+char *f_pth(inf_t *, char *, char *);
+
+/* prototypes for get_lnfunc.c */
+ssize_t get_inp(inf_t *);
+int get_ln(inf_t *, char **, size_t *);
+void sig_hndl(int);
+
+/* prototypes for hsh_func.c */
+int hsh(inf_t *, char **);
+int fnd_bltin(inf_t *);
+void fnd_cmd(inf_t *);
+void frk_cmd(inf_t *);
 
 #endif
